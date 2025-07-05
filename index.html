@@ -9,7 +9,7 @@
     body { background-color: #000; color: #fff; overflow: hidden; }
     .slide {
       position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; display: none;
-      justify-content: center; align-items: center; flex-direction: column;
+      flex-direction: column; justify-content: center; align-items: center;
       background-size: cover; background-position: center; text-align: center;
       padding: 2rem; animation: fade 1s ease;
     }
@@ -25,12 +25,15 @@
       0% { text-shadow: 0 0 5px #fff; }
       100% { text-shadow: 0 0 20px gold; }
     }
-    .next-btn {
+    .controls {
+      margin-top: 2rem;
+    }
+    .btn {
       background: linear-gradient(45deg, gold, orange); border: none; border-radius: 12px;
-      margin-top: auto; margin-bottom: 2rem; padding: 1rem 2rem; font-size: 1.2rem; cursor: pointer;
+      margin: 0.5rem; padding: 1rem 2rem; font-size: 1.2rem; cursor: pointer;
       transition: all 0.3s ease; animation: buttonFadeIn 1.5s ease forwards;
     }
-    .next-btn:hover {
+    .btn:hover {
       transform: scale(1.1); box-shadow: 0 0 10px #fff;
     }
     @keyframes buttonFadeIn {
@@ -48,54 +51,33 @@
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
+    .no-msg {
+      position: absolute; font-size: 2rem; color: red;
+      animation: float 2s infinite ease-in-out, shake 0.5s infinite alternate;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(10px); }
+    }
   </style>
 </head>
 <body>
   <button id="music-btn" title="Play Music">🎵</button>
   <audio id="bg-music" loop>
-    <source src="https://media.vocaroo.com/mp3/1had0ctx85zd" type="audio/mpeg">
+    <source src="https://vocaroo.com/media_command.php?media=1hAD0cTX85zd&command=download_mp3" type="audio/mpeg" />
   </audio>
 
   <div id="slides">
     <div class="slide active" style="background-image: url('https://wallpapercave.com/wp/wp2634281.jpg');">
       <h1>REELUSION</h1>
-      <p>Step into a world where magic meets mystery. 🎩🗝️<br> Welcome to Reelusion — your cinematic escape begins here.</p>
-      <button class="next-btn" onclick="nextSlide()">Next</button>
-    </div>
-
-    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp9774480.jpg');">
-      <h2>The Problem</h2>
-      <p>Millions of fans across the globe love magical stories but remain distant observers. They want to walk in the halls of Hogwarts, feel the thrill of real spells, and become a part of their fantasy worlds.</p>
-      <button class="next-btn" onclick="nextSlide()">Next</button>
-    </div>
-
-    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp9774447.jpg');">
-      <h2>The Solution</h2>
-      <p>Reelusion bridges fiction and reality by transforming scenes from magical worlds into real, themed escape room experiences — from spellbound chambers to interactive potions classes.</p>
-      <button class="next-btn" onclick="nextSlide()">Next</button>
-    </div>
-
-    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp7418465.jpg');">
-      <h2>Operations & Collaboration</h2>
-      <p>We collaborate with creators, artists, and designers to create authentic experiences inspired by original lore. Every prop, voice-over, and puzzle is crafted with story magic in mind.</p>
-      <button class="next-btn" onclick="nextSlide()">Next</button>
-    </div>
-
-    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp2634296.jpg');">
-      <h2>Our Magic</h2>
-      <p>Nostalgia + Interactive Tech = Pure Magic. Each escape room mixes childhood wonder with immersive gameplay, ensuring unforgettable fan journeys. 🪄</p>
-      <button class="next-btn" onclick="nextSlide()">Next</button>
-    </div>
-
-    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp2634312.jpg');">
-      <h2>The Team</h2>
-      <p>Aditya | Sparsh | Aneesa | Divyansh | Pranjal<br>Storytellers, visionaries, and your magical guides. ✨</p>
-      <button class="next-btn" onclick="nextSlide()">Next</button>
-    </div>
-
-    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp9472561.jpg');">
-      <h2>Thank You!</h2>
-      <p>Your magical journey through Reelusion ends here… but the adventure awaits. 🌟</p>
+      <p>Step into a world where magic meets mystery. 🎩🗝️<br>Welcome to Reelusion — your cinematic escape begins here.</p>
+      <div class="controls">
+        <button class="btn" onclick="askQuestion('Do you want to begin the magical journey?')">Next</button>
+      </div>
     </div>
   </div>
 
@@ -103,11 +85,86 @@
     const slides = document.querySelectorAll('.slide');
     let current = 0;
 
-    function nextSlide() {
+    function askQuestion(question) {
+      const container = slides[current];
+      const qBox = document.createElement('div');
+      qBox.innerHTML = `<p style='margin-top: 2rem;'>${question}</p>
+        <div class='controls'>
+          <button class='btn' onclick='goNext()'>Yes</button>
+          <button class='btn' onclick='showNo()'>No</button>
+        </div>`;
+      container.appendChild(qBox);
+    }
+
+    function goNext() {
       slides[current].classList.remove('active');
       current++;
-      if (current < slides.length) {
-        slides[current].classList.add('active');
+      if (current >= slides.length) {
+        addFinalSlides();
+      }
+      slides[current].classList.add('active');
+    }
+
+    function showNo() {
+      const no = document.createElement('div');
+      no.className = 'no-msg';
+      no.innerText = 'No ❌';
+      no.style.top = Math.random() * 80 + 'vh';
+      no.style.left = Math.random() * 80 + 'vw';
+      document.body.appendChild(no);
+    }
+
+    function addFinalSlides() {
+      const data = [
+        {
+          bg: 'https://wallpapercave.com/wp/wp9774480.jpg',
+          title: 'The Problem',
+          text: 'Millions of fans love magical stories but remain distant observers. They want to walk through Hogwarts and feel real spells.',
+          q: 'Do you think fans deserve more than watching?'
+        },
+        {
+          bg: 'https://wallpapercave.com/wp/wp9774447.jpg',
+          title: 'The Solution',
+          text: 'Reelusion transforms fantasy into live escape room experiences — full of enchantment and story-driven puzzles.',
+          q: 'Can immersive rooms bring stories to life?'
+        },
+        {
+          bg: 'https://wallpapercave.com/wp/wp7418465.jpg',
+          title: 'Collaboration',
+          text: 'We work with storytellers and artists to build authentic magical experiences fans can live in.',
+          q: 'Should creators help build the magic?'
+        },
+        {
+          bg: 'https://wallpapercave.com/wp/wp2634296.jpg',
+          title: 'Why Us',
+          text: 'Tech + Nostalgia = Magic. We blend AR, puzzles and your favorite fandoms into unforgettable escapes.',
+          q: 'Would you try this magical escape?'
+        },
+        {
+          bg: 'https://wallpapercave.com/wp/wp2634312.jpg',
+          title: 'Meet the Team',
+          text: 'Aditya, Sparsh, Aneesa, Divyansh, Pranjal — wizards of creativity and story.',
+          q: 'Would you join us on this journey?'
+        },
+        {
+          bg: 'https://wallpapercave.com/wp/wp9472561.jpg',
+          title: 'Thank You!',
+          text: 'You’ve completed your magical preview. Now enter Reelusion for real!'
+        }
+      ];
+
+      for (let d of data) {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.style.backgroundImage = `url('${d.bg}')`;
+        slide.innerHTML = `<h2>${d.title}</h2><p>${d.text}</p>`;
+        if (d.q) {
+          slide.innerHTML += `<div class='controls'>
+            <button class='btn' onclick='goNext()'>Yes</button>
+            <button class='btn' onclick='showNo()'>No</button>
+          </div>`;
+        }
+        document.getElementById('slides').appendChild(slide);
       }
     }
 
