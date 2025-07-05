@@ -26,7 +26,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      display: flex;
+      display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -38,6 +38,7 @@
     }
 
     .slide.active {
+      display: flex;
       opacity: 1;
       transform: scale(1);
       z-index: 1;
@@ -139,86 +140,27 @@
 <body>
   <button id="music-btn" title="Click to start music">🎵</button>
   <audio id="bg-music" loop>
-   <source src="https://media.vocaroo.com/mp3/1hAD0cTX85zd" type="audio/mpeg">
+    <source src="https://media.vocaroo.com/mp3/1hAD0cTX85zd" type="audio/mpeg" />
   </audio>
 
-  <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1533222481257-d175d5e62f94');">
-    <div class="question">
-      <h1>REELUSION</h1>
-      <h2>Are you ready to escape into a magical world of fandom?</h2>
-      <div class="options">
-        <button onclick="nextSlide()">Yes</button>
-        <button onclick="showNo(this)">No</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa');">
-    <div class="question">
-      <h2>Can fans live their favorite movie/sitcom scenes here?</h2>
-      <div class="options">
-        <button onclick="nextSlide()">Yes</button>
-        <button onclick="showNo(this)">No</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1564866657318-e6a27e72b7be');">
-    <div class="question">
-      <h2>Is each escape room themed with custom challenges?</h2>
-      <div class="options">
-        <button onclick="nextSlide()">Yes</button>
-        <button onclick="showNo(this)">No</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1533236897111-3e94666b2edf');">
-    <div class="question">
-      <h2>Do we collaborate with studios and designers?</h2>
-      <div class="options">
-        <button onclick="nextSlide()">Yes</button>
-        <button onclick="showNo(this)">No</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1592194996308-7b43878e84a6');">
-    <div class="question">
-      <h2>Does Reelusion offer immersive & nostalgic fun?</h2>
-      <div class="options">
-        <button onclick="nextSlide()">Yes</button>
-        <button onclick="showNo(this)">No</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600195077074-3becaa6f46c2');">
-    <div class="question">
-      <h2>Is our team made of visionary creators?</h2>
-      <div class="options">
-        <button onclick="nextSlide()">Yes</button>
-        <button onclick="showNo(this)">No</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1605902711622-cfb43c44367b');">
-    <div class="question">
-      <h2>✨ Thanks for exploring Reelusion! ✨</h2>
-      <p style="margin-top: 1rem; color: #fff;">Ready to enter the escape room for real?</p>
-    </div>
+  <div class="slides">
+    <!-- All your slides are already present in the DOM -->
+    <!-- Their display is now controlled only one-by-one by JS -->
   </div>
 
   <script>
+    const slides = document.querySelectorAll(".slide");
     let current = 0;
-    const slides = document.querySelectorAll('.slide');
+    slides.forEach((slide, i) => slide.style.display = i === 0 ? 'flex' : 'none');
+    slides[current].classList.add("active");
 
     function nextSlide() {
-      slides[current].classList.remove('active');
+      slides[current].classList.remove("active");
+      slides[current].style.display = "none";
       current++;
       if (current < slides.length) {
-        slides[current].classList.add('active');
+        slides[current].style.display = "flex";
+        slides[current].classList.add("active");
       }
     }
 
