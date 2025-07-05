@@ -5,17 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reelusion - Escape Into Magic</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Georgia', serif;
-    }
-    body {
-      background-color: #000;
-      color: #fff;
-      overflow: hidden;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Georgia', serif; }
+    body { background-color: #000; color: #fff; overflow: hidden; }
     .slide {
       position: absolute;
       top: 0;
@@ -32,19 +23,10 @@
       padding: 2rem;
       animation: fade 1s ease;
     }
-    .slide.active {
-      display: flex;
-      z-index: 1;
-    }
+    .slide.active { display: flex; z-index: 1; }
     @keyframes fade {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
     h1, h2, p {
       color: #ffd700;
@@ -79,34 +61,12 @@
       cursor: pointer;
       z-index: 1000;
     }
-    .no-msg {
-      position: absolute;
-      font-size: 2rem;
-      color: red;
-      animation: float 2s infinite ease-in-out, shake 0.5s infinite alternate;
-    }
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
-    }
-    @keyframes shake {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(10px);
-      }
-    }
   </style>
 </head>
 <body>
   <button id="music-btn" title="Play Music">🎵</button>
   <audio id="bg-music" loop>
-   <source src="https://media.vocaroo.com/mp3/1had0ctx85zd" type="audio/mpeg">
+   <source src="https://media.vocaroo.com/mp3/1had0ctx85zd" type="audio/mpeg" />
   </audio>
   <div id="slides"></div>
 
@@ -131,26 +91,26 @@
         question: 'Can immersive rooms bring stories to life?'
       },
       {
-        title: 'Collaboration',
-        text: 'We work with storytellers and artists to build authentic magical experiences fans can live in.',
+        title: 'How It Works',
+        text: 'Each escape room replicates magical sets using props, lighting, AR, and sound effects. Fans become part of the story.',
         bg: 'https://wallpapercave.com/wp/wp7418465.jpg',
-        question: 'Should creators help build the magic?'
+        question: 'Would you love to play inside a story world?'
       },
       {
-        title: 'Why Us',
-        text: 'Tech + Nostalgia = Magic. We blend AR, puzzles and your favorite fandoms into unforgettable escapes.',
+        title: 'Uniqueness',
+        text: 'What sets us apart? Emotional storytelling, rich detail, and nostalgia-fueled adventures — powered by tech and imagination.',
         bg: 'https://wallpapercave.com/wp/wp2634296.jpg',
-        question: 'Would you try this magical escape?'
+        question: 'Does nostalgia and magic make an unforgettable combo?'
       },
       {
         title: 'Meet the Team',
-        text: 'Aditya, Sparsh, Aneesa, Divyansh, Pranjal — wizards of creativity and story.',
+        text: 'Aditya, Sparsh, Aneesa, Divyansh, Pranjal — the creators of Reelusion. Fans. Dreamers. Doers.',
         bg: 'https://wallpapercave.com/wp/wp2634312.jpg',
-        question: 'Would you join us on this journey?'
+        question: 'Do you believe in our magical vision?'
       },
       {
         title: 'Thank You!',
-        text: 'You’ve completed your magical preview. Now enter Reelusion for real!',
+        text: 'Your magical journey through Reelusion ends here… or does it? The real escape begins when you join us.',
         bg: 'https://wallpapercave.com/wp/wp9472561.jpg'
       }
     ];
@@ -166,21 +126,17 @@
       slide.innerHTML = `<h2>${data.title}</h2><p>${data.text}</p>`;
       if (data.question) {
         slide.innerHTML += `<div id="qBox${index}" class="controls">
-          <button class="btn" onclick="showQuestion(${index}, '${data.question}')">Next</button>
+          <button class="btn" onclick="showQuestion(${index}, \"${data.question}\")">Next</button>
         </div>`;
       }
       slidesContainer.appendChild(slide);
     });
 
     function showQuestion(index, question) {
-  const qBox = document.getElementById(`qBox${index}`);
-  qBox.innerHTML = `<p style='margin-top: 2rem;'>${question}</p>
-    <button class='btn' onclick='goNext()'>Yes</button>
-    <button class='btn' onclick='repeatNo(${index}, "${question}")'>No</button>`;
-}`);
+      const qBox = document.getElementById(`qBox${index}`);
       qBox.innerHTML = `<p style='margin-top: 2rem;'>${question}</p>
         <button class='btn' onclick='goNext()'>Yes</button>
-        <button class='btn' onclick='showNo()'>No</button>`;
+        <button class='btn' onclick='repeatNo(${index}, "${question}")'>No</button>`;
     }
 
     function goNext() {
@@ -192,23 +148,12 @@
     }
 
     function repeatNo(index, question) {
-  const noText = document.createElement('div');
-  noText.className = 'no-msg';
-  noText.innerText = 'No ❌';
-  noText.style.top = Math.random() * 80 + 'vh';
-  noText.style.left = Math.random() * 80 + 'vw';
-  document.body.appendChild(noText);
-
-  const qBox = document.getElementById(`qBox${index}`);
-  qBox.innerHTML = `<p style='margin-top: 2rem; animation: fade 1s ease;'>${question}</p>
-    <button class='btn' onclick='goNext()'>Yes</button>
-    <button class='btn' onclick='repeatNo(${index}, "${question}")'>No</button>`;
-}`);
-  qBox.innerHTML = `<p style='margin-top: 2rem;'>${question}</p>
-    <p style='color:red;font-weight:bold;'>You must say Yes to continue 🚫</p>
-    <button class='btn' onclick='goNext()'>Yes</button>
-    <button class='btn' onclick='repeatNo(${index}, "${question}")'>No</button>`;
-}
+      const qBox = document.getElementById(`qBox${index}`);
+      qBox.innerHTML = `<p style='margin-top: 2rem;'>${question}</p>
+        <p style='color:red;font-weight:bold;'>You must say Yes to continue 🚫</p>
+        <button class='btn' onclick='goNext()'>Yes</button>
+        <button class='btn' onclick='repeatNo(${index}, \"${question}\")'>No</button>`;
+    }
 
     const music = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-btn');
