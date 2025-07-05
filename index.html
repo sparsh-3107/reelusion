@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reelusion - Escape Into Magic</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Georgia', serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .slides {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+
+    .slide {
+      scroll-snap-align: start;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.5);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .overlay h1 {
+      font-size: 4rem;
+      color: #f5d742;
+      text-shadow: 0 0 15px #fff;
+    }
+
+    .overlay h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #f5f5f5;
+    }
+
+    .overlay p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      line-height: 1.8;
+      color: #eee;
+    }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    #music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: gold;
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 28px;
+      box-shadow: 0 0 15px gold;
+      cursor: pointer;
+      z-index: 1000;
+      transition: transform 0.3s;
+    }
+
+    #music-btn:hover {
+      transform: scale(1.1) rotate(10deg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Magic Music Button -->
+  <button id="music-btn" title="Click to start music">🎵</button>
+
+  <!-- Hidden Audio -->
+  <audio id="bg-music" loop>
+    <source src="https://ia802606.us.archive.org/11/items/hedwigs-theme/hedwigs_theme.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- All Slides -->
+  <div class="slides">
+
+    <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1533222481257-d175d5e62f94');">
+      <div class="overlay">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Harry_Potter_wordmark.svg/512px-Harry_Potter_wordmark.svg.png" class="logo" />
+        <h1>REELUSION</h1>
+        <p>A Magical Escape Room Experience</p>
+      </div>
+    </section>
+
+    <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa');">
+      <div class="overlay">
+        <h2>🎭 Problem</h2>
+        <p>Fans dream of living their favorite movie or sitcom scenes... Reelusion turns that into reality.</p>
+      </div>
+    </section>
+
+    <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1564866657318-e6a27e72b7be');">
+      <div class="overlay">
+        <h2>🔐 Themed Escape Rooms</h2>
+        <p>Live, breathe and solve puzzles in the universe of your favorite shows. From sitcoms to Hogwarts.</p>
+      </div>
+    </section>
+
+    <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1533236897111-3e94666b2edf');">
+      <div class="overlay">
+        <h2>🧩 Competitors & Operations</h2>
+        <p>Partner with studios, design authentic puzzles, and host unforgettable events across the fandom universe.</p>
+      </div>
+    </section>
+
+    <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1592194996308-7b43878e84a6');">
+      <div class="overlay">
+        <h2>🌟 Why Reelusion?</h2>
+        <p>We blend nostalgia, mystery, and creativity for a once-in-a-lifetime escape room journey.</p>
+      </div>
+    </section>
+
+    <section class="slide" style="background-image: url('https://images.unsplash.com/photo-1600195077074-3becaa6f46c2');">
+      <div class="overlay">
+        <h2>👥 Meet the Team</h2>
+        <p>Aditya | Sparsh | Aneesa | Divyansh | Pranjal</p>
+        <p>Dreamers. Creators. Wizards of Escape.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide .overlay');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.3 });
+
+    slides.forEach(slide => {
+      slide.style.opacity = 0;
+      slide.style.transform = 'translateY(50px)';
+      slide.style.transition = 'all 1s ease-out';
+      observer.observe(slide);
+    });
+
+    // Music Button
+    const music = document.getElementById("bg-music");
+    const musicBtn = document.getElementById("music-btn");
+
+    musicBtn.addEventListener("click", () => {
+      music.play();
+      musicBtn.style.display = "none"; // hide the button
+    });
+  </script>
+
+</body>
+</html>
