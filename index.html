@@ -122,29 +122,93 @@
     #music-btn:hover {
       transform: scale(1.1) rotate(10deg);
     }
+
+    .no-msg {
+      position: absolute;
+      font-size: 2rem;
+      color: red;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
   </style>
 </head>
 <body>
   <button id="music-btn" title="Click to start music">🎵</button>
   <audio id="bg-music" loop>
-    <source src="https://media.vocaroo.com/mp3/1hAD0cTX85zd" type="audio/mpeg">
+   <source src="https://media.vocaroo.com/mp3/1hAD0cTX85zd" type="audio/mpeg">
   </audio>
-
-  <!-- Slides remain unchanged -->
-  <!-- (Preserving your existing structure and images) -->
 
   <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1533222481257-d175d5e62f94');">
     <div class="question">
       <h1>REELUSION</h1>
       <h2>Are you ready to escape into a magical world of fandom?</h2>
       <div class="options">
-        <button onclick="nextSlide()">Yes, let's go!</button>
-        <button onclick="nextSlide()">I'm curious!</button>
+        <button onclick="nextSlide()">Yes</button>
+        <button onclick="showNo(this)">No</button>
       </div>
     </div>
   </div>
-  <!-- Other slides stay the same -->
-  <!-- ... -->
+
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa');">
+    <div class="question">
+      <h2>Can fans live their favorite movie/sitcom scenes here?</h2>
+      <div class="options">
+        <button onclick="nextSlide()">Yes</button>
+        <button onclick="showNo(this)">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1564866657318-e6a27e72b7be');">
+    <div class="question">
+      <h2>Is each escape room themed with custom challenges?</h2>
+      <div class="options">
+        <button onclick="nextSlide()">Yes</button>
+        <button onclick="showNo(this)">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1533236897111-3e94666b2edf');">
+    <div class="question">
+      <h2>Do we collaborate with studios and designers?</h2>
+      <div class="options">
+        <button onclick="nextSlide()">Yes</button>
+        <button onclick="showNo(this)">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1592194996308-7b43878e84a6');">
+    <div class="question">
+      <h2>Does Reelusion offer immersive & nostalgic fun?</h2>
+      <div class="options">
+        <button onclick="nextSlide()">Yes</button>
+        <button onclick="showNo(this)">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600195077074-3becaa6f46c2');">
+    <div class="question">
+      <h2>Is our team made of visionary creators?</h2>
+      <div class="options">
+        <button onclick="nextSlide()">Yes</button>
+        <button onclick="showNo(this)">No</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1605902711622-cfb43c44367b');">
+    <div class="question">
+      <h2>✨ Thanks for exploring Reelusion! ✨</h2>
+      <p style="margin-top: 1rem; color: #fff;">Ready to enter the escape room for real?</p>
+    </div>
+  </div>
 
   <script>
     let current = 0;
@@ -165,6 +229,15 @@
       music.play();
       musicBtn.style.display = "none";
     });
+
+    function showNo(button) {
+      const no = document.createElement('div');
+      no.className = 'no-msg';
+      no.innerText = 'No ❌';
+      no.style.top = Math.random() * 80 + 'vh';
+      no.style.left = Math.random() * 80 + 'vw';
+      document.body.appendChild(no);
+    }
   </script>
 </body>
 </html>
