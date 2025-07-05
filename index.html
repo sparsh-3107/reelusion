@@ -18,18 +18,6 @@
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
-    .question-box {
-      background: rgba(0, 0, 0, 0.6); padding: 2rem; border-radius: 20px;
-      box-shadow: 0 0 15px gold; display: none; animation: glow 2s ease-in-out infinite alternate, popIn 1s ease forwards;
-    }
-    @keyframes glow {
-      0% { box-shadow: 0 0 10px gold; }
-      100% { box-shadow: 0 0 25px gold; }
-    }
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); }
-    }
     h1, h2, p {
       color: #ffd700; text-shadow: 0 0 10px #fff; animation: textGlow 3s infinite alternate;
     }
@@ -37,12 +25,12 @@
       0% { text-shadow: 0 0 5px #fff; }
       100% { text-shadow: 0 0 20px gold; }
     }
-    .options button, .next-btn {
+    .next-btn {
       background: linear-gradient(45deg, gold, orange); border: none; border-radius: 12px;
-      margin: 1rem; padding: 1rem 2rem; font-size: 1.2rem; cursor: pointer;
+      margin-top: auto; margin-bottom: 2rem; padding: 1rem 2rem; font-size: 1.2rem; cursor: pointer;
       transition: all 0.3s ease; animation: buttonFadeIn 1.5s ease forwards;
     }
-    .options button:hover, .next-btn:hover {
+    .next-btn:hover {
       transform: scale(1.1); box-shadow: 0 0 10px #fff;
     }
     @keyframes buttonFadeIn {
@@ -60,120 +48,67 @@
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
-    .no-msg {
-      position: absolute; font-size: 2rem; color: red;
-      animation: float 2s infinite ease-in-out, shake 0.5s infinite alternate;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(10px); }
-    }
   </style>
 </head>
 <body>
   <button id="music-btn" title="Play Music">🎵</button>
   <audio id="bg-music" loop>
-   <source src="https://media.vocaroo.com/mp3/1hAD0cTX85zd" type="audio/mpeg">
+    <source src="https://media.vocaroo.com/mp3/1had0ctx85zd" type="audio/mpeg">
   </audio>
 
   <div id="slides">
-    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1533222481257-d175d5e62f94');">
-      <div class="question-box" id="box0" style="display: block;">
-        <h1>REELUSION</h1>
-        <p>Step into a world where magic meets mystery. 🎩🗝️<br> Welcome to Reelusion — your cinematic escape begins here.</p>
-        <div class="options"><button onclick="nextSlide()">Enter</button></div>
-      </div>
+    <div class="slide active" style="background-image: url('https://wallpapercave.com/wp/wp2634281.jpg');">
+      <h1>REELUSION</h1>
+      <p>Step into a world where magic meets mystery. 🎩🗝️<br> Welcome to Reelusion — your cinematic escape begins here.</p>
+      <button class="next-btn" onclick="nextSlide()">Next</button>
     </div>
 
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa');">
-      <button class="next-btn" onclick="reveal(1)">Next</button>
-      <div class="question-box" id="box1">
-        <h2>The Problem</h2>
-        <p>Millions of fans across the globe are deeply connected to their favorite movies, TV shows, and fantasy worlds. But watching on a screen just isn’t enough. They want to <em>live</em> those stories — walk through iconic locations, solve mysteries, and become part of the plot themselves. This emotional longing creates a huge gap between passive viewership and active participation in fan experiences.</p>
-        <p><strong>Do fans crave real experiences over just watching?</strong></p>
-        <div class="options"><button onclick="nextSlide()">Yes</button><button onclick="showNo(this)">No</button></div>
-      </div>
+    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp9774480.jpg');">
+      <h2>The Problem</h2>
+      <p>Millions of fans across the globe love magical stories but remain distant observers. They want to walk in the halls of Hogwarts, feel the thrill of real spells, and become a part of their fantasy worlds.</p>
+      <button class="next-btn" onclick="nextSlide()">Next</button>
     </div>
 
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1564866657318-e6a27e72b7be');">
-      <button class="next-btn" onclick="reveal(2)">Next</button>
-      <div class="question-box" id="box2">
-        <h2>The Magical Solution</h2>
-        <p>Reelusion bridges fiction and reality by creating immersive, interactive escape rooms built entirely around beloved fandoms. Imagine stepping into Hogwarts to solve a magical puzzle, escaping from a Jurassic jungle, or finding clues in a Central Perk-like café. Each room is designed with attention to detail, interactivity, and enchantment — turning passive fans into active participants.</p>
-        <p><strong>Can immersive spaces turn fantasy into reality?</strong></p>
-        <div class="options"><button onclick="nextSlide()">Yes</button><button onclick="showNo(this)">No</button></div>
-      </div>
+    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp9774447.jpg');">
+      <h2>The Solution</h2>
+      <p>Reelusion bridges fiction and reality by transforming scenes from magical worlds into real, themed escape room experiences — from spellbound chambers to interactive potions classes.</p>
+      <button class="next-btn" onclick="nextSlide()">Next</button>
     </div>
 
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1533236897111-3e94666b2edf');">
-      <button class="next-btn" onclick="reveal(3)">Next</button>
-      <div class="question-box" id="box3">
-        <h2>How It Works</h2>
-        <p>We collaborate with licensed studios and passionate creators to design escape rooms that honor original lore, characters, and plotlines. Every room is a cinematic masterpiece, filled with riddles, effects, voice-overs, and props that align with the original universe. It’s not just a game — it’s a carefully curated story experience.</p>
-        <p><strong>Should creators be part of fan experiences?</strong></p>
-        <div class="options"><button onclick="nextSlide()">Yes</button><button onclick="showNo(this)">No</button></div>
-      </div>
+    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp7418465.jpg');">
+      <h2>Operations & Collaboration</h2>
+      <p>We collaborate with creators, artists, and designers to create authentic experiences inspired by original lore. Every prop, voice-over, and puzzle is crafted with story magic in mind.</p>
+      <button class="next-btn" onclick="nextSlide()">Next</button>
     </div>
 
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1592194996308-7b43878e84a6');">
-      <button class="next-btn" onclick="reveal(4)">Next</button>
-      <div class="question-box" id="box4">
-        <h2>What Makes Us Unique</h2>
-        <p>Our edge lies in the emotional connection we build. By blending nostalgic design with cutting-edge technology like AR, soundscapes, and smart puzzles, Reelusion creates an experience that’s not only immersive but deeply memorable. Every room speaks to the fan within — emotionally and intellectually.</p>
-        <p><strong>Is a personalized, story-driven escape room the future?</strong></p>
-        <div class="options"><button onclick="nextSlide()">Yes</button><button onclick="showNo(this)">No</button></div>
-      </div>
+    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp2634296.jpg');">
+      <h2>Our Magic</h2>
+      <p>Nostalgia + Interactive Tech = Pure Magic. Each escape room mixes childhood wonder with immersive gameplay, ensuring unforgettable fan journeys. 🪄</p>
+      <button class="next-btn" onclick="nextSlide()">Next</button>
     </div>
 
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600195077074-3becaa6f46c2');">
-      <button class="next-btn" onclick="reveal(5)">Next</button>
-      <div class="question-box" id="box5">
-        <h2>The Wizards Behind the Magic</h2>
-        <p>Meet the minds behind the magic: Aditya, Sparsh, Aneesa, Divyansh & Pranjal — innovators, storytellers, and die-hard fans. Together, they combine tech, creativity, and passion to build worlds within walls. Their mission? To give every fan the adventure they always dreamed of.</p>
-        <p><strong>Ready to trust this magical team?</strong></p>
-        <div class="options"><button onclick="nextSlide()">Yes</button><button onclick="showNo(this)">No</button></div>
-      </div>
+    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp2634312.jpg');">
+      <h2>The Team</h2>
+      <p>Aditya | Sparsh | Aneesa | Divyansh | Pranjal<br>Storytellers, visionaries, and your magical guides. ✨</p>
+      <button class="next-btn" onclick="nextSlide()">Next</button>
     </div>
 
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1605902711622-cfb43c44367b');">
-      <div class="question-box">
-        <h2>Thank You!</h2>
-        <p>You’ve reached the end of your magical journey.✨<br>Now… are you ready to escape into the world of Reelusion for real?</p>
-      </div>
+    <div class="slide" style="background-image: url('https://wallpapercave.com/wp/wp9472561.jpg');">
+      <h2>Thank You!</h2>
+      <p>Your magical journey through Reelusion ends here… but the adventure awaits. 🌟</p>
     </div>
   </div>
 
   <script>
     const slides = document.querySelectorAll('.slide');
     let current = 0;
-    const boxes = document.querySelectorAll('.question-box');
 
     function nextSlide() {
-      boxes[current].style.display = "none";
       slides[current].classList.remove('active');
       current++;
       if (current < slides.length) {
         slides[current].classList.add('active');
-        boxes[current].style.display = "none";
       }
-    }
-
-    function reveal(index) {
-      const box = document.getElementById('box' + index);
-      if (box) box.style.display = "block";
-    }
-
-    function showNo() {
-      const no = document.createElement('div');
-      no.className = 'no-msg';
-      no.innerText = 'No ❌';
-      no.style.top = Math.random() * 80 + 'vh';
-      no.style.left = Math.random() * 80 + 'vw';
-      document.body.appendChild(no);
     }
 
     const music = document.getElementById("bg-music");
